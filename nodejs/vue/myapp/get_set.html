@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Изучаем Vue 3</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname" />
+        <input type="text" v-model="lastname" />
+        <input type="text" v-model="fullname" />
+        <p>Имя: {{fullname}}</p>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    firstname: 'Tom',
+                    lastname: 'Smith'
+                }
+            },
+            computed: {
+                fullname: {
+                    get: function() {
+                        return this.firstname + ' ' + this.lastname;
+                    },
+                    set: function(newValue) {
+                        const names = newValue.split(' ')
+                        this.firstname = names[0]
+                        this.lastname = names[names.length - 1]
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
