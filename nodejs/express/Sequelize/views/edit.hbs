@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Редактирование пользователя</title>
+    <title>Редактирование записи</title>
     <meta charset="utf-8" />
     <style>.field{width:180px;}</style>
 </head>
 <body>
-    <h1>Редактирование пользователя</h1>
+    <h1>Редактирование записи</h1>
      <form action="/edit" method="POST">
         <input type="hidden" name="id" value="{{user.id}}" />
-        <label>Имя</label><br>
-        <input name="name" value="{{user.name}}"  class="field" /><br><br>
-        <label>Возраст</label><br>
-        <input name="age" type="number" min="1" max="110" value="{{user.age}}" class="field" /><br><br>
+        <label>url</label><br>
+        <input name="url" value="{{links.url}}"  class="field" /><br><br>
+        <label>Info</label><br>
+        <input name="info"  value="{{links.info}}" class="field" /><br><br>
+        <label>Дата рег.</label><br>
+        <input name="regdate"  value="{{links.regdate}}" class="field" /><br><br>
         <input type="submit" value="Отправить" />
      </form>
-     <a href="/">К списку пользователей</a>
+     <a href="/">К списку записей</a>
 </body>
 <html>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Список пользователей</title>
+    <title>Список links </title>
     <meta charset="utf-8" />
 </head>
 <body>
-    <h1>Список пользователей</h1>
-    <p><a href="/create">Добавить пользователя</a></p>
+    <h1>Список links </h1>
+    <p><a href="/create">Добавить запись</a></p>
     <table>
-        <tr><th>Name</th><th>Age</th><th></th></tr>
-        {{#each users}}
+        <tr><th>Url</th><th>Info</th><th>Reg Date</th></tr>
+        {{#each links}}
             <tr>
-                <td>{{this.name}}</td>
-                <td>{{this.age}}</td>
+                <td>{{this.url}}</td>
+                <td>{{this.info}}</td>
+                <td>{{this.regdate}}</td>
                 <td>
                     <a href="/edit/{{this.id}}">Edit</a>|
                     <form action="delete/{{this.id}}" method="POST" style="display:inline;">
