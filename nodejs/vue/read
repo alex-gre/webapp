@@ -1,0 +1,10 @@
+start:
+
+npm install -g @vue/cli
+npm init vite@latest vue_app -- --template vue
+
+cd vue_app
+npm install 
+npm run dev
+
+http://127.0.0.1:5173/
