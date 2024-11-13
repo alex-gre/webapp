@@ -1,0 +1,29 @@
+<div id="app">
+    <select v-model="selectedUser">
+        <option v-for="user in users" v-bind:value="user.name">{{user.name}}</option>
+    </select>
+    <span>Выбрано: {{selectedUser}}</span>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script>
+    Vue.createApp({
+        data() {
+            return {
+                users: [{
+                    name: 'Tom',
+                    age: 22
+                }, {
+                    name: 'Bob',
+                    age: 25
+                }, {
+                    name: 'Sam',
+                    age: 28
+                }, {
+                    name: 'Alice',
+                    age: 26
+                }],
+                selectedUser: ''
+            }
+        }
+    }).mount('#app');
+</script>

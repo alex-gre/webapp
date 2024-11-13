@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Изучаем Vue 3</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app" class="col-md-4">
+        <label>Введите комментарий</label>
+        <textarea v-model="comment" class="form-control"></textarea>
+        <br>
+        <div>
+            <h3>Комментарий</h3>
+            <p style="white-space: pre-line">{{comment}}</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    comment: 'Комментарий....'
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
