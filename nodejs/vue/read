@@ -1,4 +1,5 @@
 start:
+https://metanit.com/web/vue/
 
 npm install -g @vue/cli
 npm init vite@latest vue_app -- --template vue
