@@ -1,32 +1,38 @@
 const Sequelize = require("sequelize");
 const express = require("express");
 
+
+
 const app = express();
 const urlencodedParser = express.urlencoded({ extended: false });
 
 // определяем объект Sequelize
 const sequelize = new Sequelize({
     dialect: "sqlite",
-    storage: "metanit.db",
+    storage: "links_url.db",
     define: {
         timestamps: false
     }
 });
 
-// определяем модель User
-const User = sequelize.define("user", {
+// определяем модель Links
+const Links = sequelize.define("links", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    name: {
+    url: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    age: {
-        type: Sequelize.INTEGER,
+    info: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    regdate: {
+        type: Sequelize.DATE,
         allowNull: false
     }
 });
@@ -36,15 +42,15 @@ app.set("view engine", "hbs");
 // синхронизация с бд, после успшной синхронизации запускаем сервер
 sequelize.sync().then(() => {
     app.listen(3000, function() {
-        console.log("Сервер ожидает подключения...");
+        console.log("Сервер ожидает подключения на :3000 port...");
     });
 }).catch(err => console.log(err));
 
 // получение данных
 app.get("/", function(req, res) {
-    User.findAll({ raw: true }).then(data => {
+    Links.findAll({ raw: true }).then(data => {
         res.render("index.hbs", {
-            users: data
+            links: data
         });
     }).catch(err => console.log(err));
 });
@@ -57,21 +63,21 @@ app.get("/create", function(req, res) {
 app.post("/create", urlencodedParser, function(req, res) {
 
     if (!req.body) return res.sendStatus(400);
-
-    const username = req.body.name;
-    const userage = req.body.age;
-    User.create({ name: username, age: userage }).then(() => {
+    const urldate = req.body.regdate;
+    const urlname = req.body.url;
+    const urlinfo = req.body.info;
+    Links.create({ url: urlname, info: urlinfo, regdate: urldate }).then(() => {
         res.redirect("/");
     }).catch(err => console.log(err));
 });
 
 // получаем объект по id для редактирования
 app.get("/edit/:id", function(req, res) {
-    const userid = req.params.id;
-    User.findAll({ where: { id: userid }, raw: true })
+    const urlid = req.params.id;
+    Links.findAll({ where: { id: urlid }, raw: true })
         .then(data => {
             res.render("edit.hbs", {
-                user: data[0]
+                links: data[0]
             });
         })
         .catch(err => console.log(err));
@@ -82,10 +88,11 @@ app.post("/edit", urlencodedParser, function(req, res) {
 
     if (!req.body) return res.sendStatus(400);
 
-    const username = req.body.name;
-    const userage = req.body.age;
+    const urlname = req.body.url;
+    const urlinfo = req.body.info;
+    const urldate = req.body.regdate;
     const userid = req.body.id;
-    User.update({ name: username, age: userage }, { where: { id: userid } }).then(() => {
+    Links.update({ url: urlname, info: urlinfo, regdate: urldate }, { where: { id: userid } }).then(() => {
             res.redirect("/");
         })
         .catch(err => console.log(err));
@@ -94,7 +101,7 @@ app.post("/edit", urlencodedParser, function(req, res) {
 // удаление данных
 app.post("/delete/:id", function(req, res) {
     const userid = req.params.id;
-    User.destroy({ where: { id: userid } }).then(() => {
+    Links.destroy({ where: { id: userid } }).then(() => {
         res.redirect("/");
     }).catch(err => console.log(err));
 });
