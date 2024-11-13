@@ -1,1 +1,18 @@
-install
+install node
+downloads
+https://nodejs.org/en/download/prebuilt-installer
+разархивировать в c:\node
+=========================
+настроить env path
+
+
+install packages примеры:
+=======================
+npm install --save mysql2
+npm i react-qr-code
+
+
+
+
+
+
