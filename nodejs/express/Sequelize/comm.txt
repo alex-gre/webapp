@@ -1,0 +1,1 @@
+npm install --save hbs express sqlite3 sequelize 
