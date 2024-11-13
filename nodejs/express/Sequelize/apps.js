@@ -91,8 +91,8 @@ app.post("/edit", urlencodedParser, function(req, res) {
     const urlname = req.body.url;
     const urlinfo = req.body.info;
     const urldate = req.body.regdate;
-    const userid = req.body.id;
-    Links.update({ url: urlname, info: urlinfo, regdate: urldate }, { where: { id: userid } }).then(() => {
+    const urlid = req.body.id;
+    Links.update({ url: urlname, info: urlinfo, regdate: urldate }, { where: { id: urlid } }).then(() => {
             res.redirect("/");
         })
         .catch(err => console.log(err));
@@ -100,8 +100,8 @@ app.post("/edit", urlencodedParser, function(req, res) {
 
 // удаление данных
 app.post("/delete/:id", function(req, res) {
-    const userid = req.params.id;
-    Links.destroy({ where: { id: userid } }).then(() => {
+    const urlid = req.params.id;
+    Links.destroy({ where: { id: urlid } }).then(() => {
         res.redirect("/");
     }).catch(err => console.log(err));
 });
